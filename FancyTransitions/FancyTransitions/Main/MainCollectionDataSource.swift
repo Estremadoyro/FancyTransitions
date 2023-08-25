@@ -1,5 +1,5 @@
 //
-//  MainCollection.swift
+//  MainCollectionDataSource.swift
 //  FancyTransitions
 //
 //  Created by Leonardo  on 22/04/23.
@@ -34,7 +34,7 @@ final class MainCollectionDataSource: NSObject {
 
 extension MainCollectionDataSource: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        contents.isEmpty ? 0 : 1
+        contents.isEmpty ? 0 : 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -42,6 +42,10 @@ extension MainCollectionDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnimeCell.reuseID,
+                                                      for: indexPath) as! AnimeCell
+        cell.content = contents[indexPath.item]
+        cell.setup()
+        return cell
     }
 }
